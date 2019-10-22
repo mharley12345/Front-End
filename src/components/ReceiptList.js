@@ -1,44 +1,47 @@
-import React, { useEffect, useState } from 'react';
-import { axiosWithAuth } from '../utils/AxiosWithAuth';
-import Receipts from './Receipts.js';
-import AddReceipt from './AddReceipt.js';
-import SearchReceipt from './SearchReceipt.js';
+import React, { useEffect, useState } from "react";
+import { fetchReceipts } from "../actions";
+import Receipts from "./Receipts.js";
+import AddReceipt from "./AddReceipt.js";
+import SearchReceipt from "./SearchReceipt.js";
+import { connect } from 'react-redux';
 
 const ReceiptList = props => {
-    const [receipts, setReceipts] = useState([]);
-    const [search, setSearch] = useState("");
+  useEffect(() => {
+    props.fetchReceipts();
+  }, []);
 
-    const fetchData = async () => {
-        await axiosWithAuth() 
-        .get("/auth/receipts/all")
-        .then(response => {
-            setReceipts(response.data);
-        })
-        .catch(error => {
-            console.log("Receipts were not retrieved", error);
-        })
+    if(props.isLoading){
+        //spinner
+        return(
+        <p>Loading...</p>
+        )
     }
-    
-    useEffect(() => {
-       fetchData();
-    }, []);
-    return (
-        <section className="receipt-list">
-          <div className="receipts">
-          {receipts.map(receipt => (
-             <Receipts 
-                key={receipt.id}
-                date={receipt.date_of_transaction}
-                amount={receipt.amount_spent}
-                category={receipt.category}
-                merchant={receipt.merchant}
-             />
-            ))}
-            <AddReceipt />
-            <SearchReceipt />
-          </div>
-        </section>
-    );
+
+  return (
+    <section className="receipt-list">
+      <div className="receipts">
+        {props.receipts.map(receipt => (
+          <Receipts
+            key={receipt.id}
+            date={receipt.date_of_transaction}
+            amount={receipt.amount_spent}
+            category={receipt.category}
+            merchant={receipt.merchant}
+          />
+        ))}
+        <AddReceipt />
+        <SearchReceipt />
+      </div>
+    </section>
+  );
+};
+
+const mapStateToProps = state => {
+    return {
+        receipts: state.receipts,
+        isLoading: state.isLoading,
+        error: state.error
+    }
 }
 
-export default ReceiptList;
+export default connect(mapStateToProps,{fetchReceipts})(ReceiptList);
