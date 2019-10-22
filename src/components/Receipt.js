@@ -1,11 +1,12 @@
-/*dependencies*/
 import React from 'react';
-
+import EditReceipt from './EditReceipt.js';
 
 const Receipt = () => {
-    return(
-        <div>This is a Receipt</div>
-    )
+    return (
+        <div>
+            <EditReceipt />
+        </div>
+    );
 }
 
-export default Receipt
+export default Receipt;
