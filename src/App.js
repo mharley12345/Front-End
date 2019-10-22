@@ -9,6 +9,7 @@ import LoginForm from './components/Login';
 import PrivateRoute from './utils/PrivateRoute';
 import Navbar from './components/Navbar';
 import ReceiptList from './components/ReceiptList';
+import SignupForm from './components/SignUp';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Switch>
           <Route exact path='/' component={LoginForm} />
           <PrivateRoute path='/receipts' component={ReceiptList} />
+          <Route path='/signup' component={SignupForm} />
           <Route component={LoginForm} />
         </Switch>
     </div>
