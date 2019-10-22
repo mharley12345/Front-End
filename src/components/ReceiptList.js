@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { fetchReceipts } from "../actions";
 import Receipts from "./Receipts.js";
 import AddReceipt from "./AddReceipt.js";
