@@ -1,8 +1,8 @@
 # Receipt Tracker
 
-## About
+##About
 
-## Dependencies
+##Dependencies
 
  - Redux
  - React-Redux
@@ -11,5 +11,5 @@
  - React-Router-Dom
  - React-Strap
  - Bootstrap
-
+ 
 ##Important Notes
