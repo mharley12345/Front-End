@@ -1,4 +1,8 @@
 //index.js for reducers
+
+import { START_FETCHING, FETCH_SUCCESS_RECEIPTS, FETCH_FAILURE } from '../actions'
+
+
 const initialState = {
   users: [
     {
@@ -25,7 +29,27 @@ const initialState = {
 
 export const reducer = (state = initialState, action) => {
     switch(action.type){
-        default: 
+        
+      case START_FETCHING:
+        return{
+          ...state,
+          isLoading: true,
+          error: ''
+        };
+      case FETCH_SUCCESS_RECEIPTS:
+        return{
+          ...state,
+          isLoading: false,
+          error:'',
+          receipts: action.payload
+        }  
+      case FETCH_FAILURE:
+        return{
+          ...state,
+          isLoading: false,
+          error: action.payload
+        }
+      default: 
         return state
     }
 }
