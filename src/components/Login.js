@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { axiosWithAuth } from '../utils/AxiosWithAuth';
 import { Redirect } from 'react-router-dom';
-import { Form, FormGroup, Label, Input, FormFeedback, FormText, Button } from 'react-strap'
+import { Form, FormGroup, Label, Input, FormFeedback, FormText, Button } from 'reactstrap'
 
 const LoginForm = (props) => {
     const [credentials, setCredentials] = useState({});
@@ -16,6 +16,13 @@ const LoginForm = (props) => {
 
     const login = e => {
         e.preventDefault();
+        axiosWithAuth()
+        .post('/login', credentials)
+        .then(res => {
+            localStorage.setItem('token', res.data.payload);
+            props.history.push('/home')
+        })
+        .catch(err => console.log(err.response))
     }
 
     return(
@@ -38,7 +45,7 @@ const LoginForm = (props) => {
                     <Input type = 'password'
                             name = 'password'
                             placeholder = 'Password'
-                            value = {credentials.username}
+                            value = {credentials.password}
                             onChange = {handleChange}
                             />
                 </FormGroup>
