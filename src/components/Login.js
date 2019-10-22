@@ -1,7 +1,7 @@
 /*dependencies*/
 import React, { useState } from 'react';
 import { axiosWithAuth } from '../utils/AxiosWithAuth';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import { Form, FormGroup, Label, Input, FormFeedback, FormText, Button } from 'reactstrap'
 
 const LoginForm = (props) => {
@@ -50,6 +50,9 @@ const LoginForm = (props) => {
                             />
                 </FormGroup>
                 <Button>Log In</Button>
+                <FormText>Not a member? Click <Link to='/signup'>
+                    here
+                </Link> to sign up!</FormText>
             </Form>
             </>
         )
