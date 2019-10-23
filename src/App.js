@@ -11,7 +11,9 @@ import Navigation from './components/Navigation';
 import Home from './components/Home.js';
 import ReceiptList from './components/ReceiptList';
 import SignupForm from './components/SignUp';
+
 import AddReceipt from './components/AddReceipt'
+
 
 function App() {
   return (
@@ -19,9 +21,11 @@ function App() {
         <Navigation />
         <Switch>
           <Route exact path='/' component={LoginForm} />
+
           <PrivateRoute path ='/home' component={Home} />
           <PrivateRoute path='/receipts' component={ReceiptList} />
           <PrivateRoute path='/add-receipt' component={AddReceipt} />          
+
           <Route path='/signup' component={SignupForm} />
           <Route component={LoginForm} />
         </Switch>

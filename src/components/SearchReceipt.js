@@ -1,3 +1,4 @@
+
 //this code was all written by Soraia, and imported manually for efficiency. 
 
 import React from 'react';
@@ -18,6 +19,7 @@ const SearchReceipt = (props) => {
             />
          </form>
     </div>
+
     );
 }
 
