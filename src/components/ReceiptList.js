@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { fetchReceipts } from "../actions";
 import Receipts from "./Receipts.js";
 import AddReceipt from "./AddReceipt.js";
@@ -7,9 +7,12 @@ import { connect } from 'react-redux';
 import { Spinner } from 'reactstrap';
 
 const ReceiptList = props => {
+  const [search, setSearch] = useState('');
+  
+  
   useEffect(() => {
-    props.fetchReceipts();
-  }, []);
+    props.fetchReceipts(search);
+  }, [search]);
 
     if(props.isLoading){
         //spinner
@@ -21,9 +24,13 @@ const ReceiptList = props => {
         )
       }
       
+      const handleChange = event => {
+        setSearch(event.target.value)
+      }
+
       return (
         <section className="receipt-list">
-        <SearchReceipt />
+        <SearchReceipt handleChange={handleChange}/>
       <div className="receipts">
         {props.receipts.map(receipt => (
           <Receipts
