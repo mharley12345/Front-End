@@ -2,8 +2,8 @@
 import React, { useState } from 'react';
 import { axiosWithAuth } from '../utils/AxiosWithAuth';
 import { Redirect, Link } from 'react-router-dom';
-
 import { Form, FormGroup, Label, Input, FormText, Button } from 'reactstrap'
+
 
 const LoginForm = (props) => {
     const [credentials, setCredentials] = useState({});
@@ -21,6 +21,7 @@ const LoginForm = (props) => {
         .post('/login', credentials)
         .then(res => {
             localStorage.setItem('token', res.data.token);
+
             props.history.push('/home')
         })
         .catch(err => console.log(err.response))
@@ -60,6 +61,7 @@ const LoginForm = (props) => {
     )
 
 }
+
 
 export default LoginForm
 

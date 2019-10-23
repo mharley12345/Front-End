@@ -1,6 +1,3 @@
-
-//this code was all written by Soraia, and imported manually for efficiency. 
-
 import React from 'react';
 
 const SearchReceipt = (props) => {
@@ -14,6 +11,7 @@ const SearchReceipt = (props) => {
               name="name"
               tabIndex="0"
               className="prompt search-name"
+
               placeholder="search receipts"
               autoComplete="off"
             />

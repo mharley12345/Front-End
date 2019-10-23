@@ -1,4 +1,5 @@
 
+
 import React, { useEffect, useState } from "react";
 
 import { fetchReceipts } from "../actions";
@@ -69,3 +70,4 @@ const mapStateToProps = state => {
 }
 
 export default connect(mapStateToProps,{fetchReceipts})(ReceiptList);
+

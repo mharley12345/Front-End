@@ -1,3 +1,4 @@
+
 # Receipt Tracker
 
 ## About
