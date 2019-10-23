@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Axios from 'axios';
 import Receipts from './Receipts.js';
+import Receipt from './Receipt.js';
 import AddReceipt from './AddReceipt.js';
 import SearchReceipt from './SearchReceipt.js';
 
@@ -25,11 +26,12 @@ const ReceiptList = () => {
         setSearch(event.target.value);
     };
 
+
     return (
         <section className="receipt-list">
          <SearchReceipt handleChange = {handleChange}/>
           <div className="receipts">
-            {receipts.map(receipt => (
+            {receipts.map((receipt) => (
              <Receipts 
                 key={receipt.id}
                 date={receipt.date_of_transaction}
@@ -38,6 +40,7 @@ const ReceiptList = () => {
                 merchant={receipt.merchant}
              />
             ))}
+            <Receipt />
             <AddReceipt />
           </div>
         </section>
