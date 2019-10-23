@@ -72,7 +72,7 @@ const AddReceipt = props => {
                 Upload an image of your receipt in .jpg format.
             </FormText>
       </FormGroup>
-      <Button>Add Receipt</Button>
+      <Button>Submit</Button>
     </Form>
   );
 };

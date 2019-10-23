@@ -11,21 +11,27 @@ export const ADD_RECEIPT = 'ADD_RECEIPT';
 export const DELETE_RECEIPT = 'DELETE_RECEIPT';
 
 
-export const fetchReceipts = () => dispatch => {
+export const fetchReceipts = search => dispatch => {
     dispatch({ type: START_FETCHING });
-
+    
     axiosWithAuth()
     .get("/auth/receipts/all")
-    .then(res => dispatch({ type: FETCH_SUCCESS_RECEIPTS, payload: res.data}))
+    .then(res => dispatch({ type: FETCH_SUCCESS_RECEIPTS, payload: res.data.filter(receipt =>
+        receipt.toLowerCase().includes(search.toLowerCase()))}))
     .catch(err => dispatch({ type: FETCH_FAILURE, payload: err}))
-
+    
     
 }
+
 export const addReceipt = receipt => dispatch => {
+   dispatch({ type: START_FETCHING });
+
+   axiosWithAuth()
+
+   
     dispatch({ type: ADD_RECEIPT, payload: receipt})
 }
 
 export const deleteReceipt = () => dispatch => {
     dispatch({ type: DELETE_RECEIPT });
 }
-
