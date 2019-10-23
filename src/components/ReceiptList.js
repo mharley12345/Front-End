@@ -13,16 +13,23 @@ const ReceiptList = () => {
             .get("https://api-receipt-tracker.herokuapp.com/api/auth/receipts/all")
             .then(response => {
                 console.log(response);
+                const data = response.data.filter(receipt =>
+                    receipt.name.toLowerCase().includes(search.toLowerCase()))
             })
             .catch(error => {
                 console.log("Receipts were not retrieved", error);
-            })
-    }, []);
+            });
+    }, [search]);
+
+    const handleChange = event => {
+        setSearch(event.target.value);
+    };
 
     return (
         <section className="receipt-list">
+         <SearchReceipt handleChange = {handleChange}/>
           <div className="receipts">
-            receipts.map(receipt => (
+            {receipts.map(receipt => (
              <Receipts 
                 key={receipt.id}
                 date={receipt.date_of_transaction}
@@ -30,9 +37,8 @@ const ReceiptList = () => {
                 category={receipt.category}
                 merchant={receipt.merchant}
              />
-            ))
+            ))}
             <AddReceipt />
-            <SearchReceipt />
           </div>
         </section>
     );
