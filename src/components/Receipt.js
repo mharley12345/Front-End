@@ -1,4 +1,5 @@
 import React from 'react';
+
 import DeleteReceipt from './DeleteReceipt.js';
 
 
@@ -12,8 +13,11 @@ const Receipt = (props) => {
     return (
         <div className="receipt">
             <DeleteReceipt deleteReceipt = {deleteReceipt}/>
+
         </div>
     );
 }
 
+
 export default Receipt;
+

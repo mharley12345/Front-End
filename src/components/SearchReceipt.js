@@ -11,11 +11,13 @@ const SearchReceipt = (props) => {
               name="name"
               tabIndex="0"
               className="prompt search-name"
-              placeholder="search by name"
+
+              placeholder="search receipts"
               autoComplete="off"
             />
          </form>
     </div>
+
     );
 }
 
