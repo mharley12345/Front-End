@@ -1,17 +1,21 @@
 //index.js for reducers
 
-import { START_FETCHING, FETCH_SUCCESS_RECEIPTS, FETCH_FAILURE } from '../actions'
+
+import { START_FETCHING, FETCH_SUCCESS_RECEIPTS, FETCH_FAILURE, ADD_RECEIPT, DELETE_RECEIPT } from '../actions'
 
 
 const initialState = {
-  users: [
+  user: 
+
     {
       userid: "",
       username: "",
       email: "",
       password: ""
     }
-  ],
+
+  ,
+
   receipts: [
     {
       receiptid: "",
@@ -20,7 +24,10 @@ const initialState = {
       merchant: "",
       image_url: "",
       user_username: "",
-      description: ""
+
+      description: "",
+      amount_spent:""
+
     }
   ],
   isLoading: false,
@@ -49,6 +56,26 @@ export const reducer = (state = initialState, action) => {
           isLoading: false,
           error: action.payload
         }
+
+      case ADD_RECEIPT:
+        return{
+          ...state,
+          receipts:[
+            ...state.receipts, {
+              ...action.payload,
+              id: Date.now(),
+              user_username: state.user.username
+            }
+          ]
+        }
+      case DELETE_RECEIPT:
+        return{
+          ...state,
+          receipts:[
+            ...action.payload
+          ]
+        }
+
       default: 
         return state
     }
