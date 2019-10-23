@@ -11,8 +11,8 @@ const ReceiptList = props => {
   
   
   useEffect(() => {
-    props.fetchReceipts(search);
-  }, [search]);
+    props.fetchReceipts();
+  }, []);
 
     if(props.isLoading){
         //spinner
@@ -32,7 +32,14 @@ const ReceiptList = props => {
         <section className="receipt-list">
         <SearchReceipt handleChange={handleChange}/>
       <div className="receipts">
-        {props.receipts.map(receipt => (
+        {props.receipts.filter(receipt =>
+        receipt.merchant.toLowerCase().includes(search.toLowerCase())
+        || receipt.amount_spent.toString().toLowerCase().includes(search.toLowerCase())
+        || receipt.category.toLowerCase().includes(search.toLowerCase())
+        || receipt.date_of_transaction.toString().toLowerCase().includes(search.toLowerCase())
+        || receipt.description.toLowerCase().includes(search.toLowerCase())
+
+        ).map(receipt => (
           <Receipts
             key={receipt.id}
             date={receipt.date_of_transaction}
