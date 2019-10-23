@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { fetchReceipts } from "../actions";
 import Receipts from "./Receipts.js";
 import AddReceipt from "./AddReceipt.js";
 import SearchReceipt from "./SearchReceipt.js";
 import { connect } from 'react-redux';
+import { Spinner } from 'reactstrap';
 
 const ReceiptList = props => {
   useEffect(() => {
@@ -13,12 +14,16 @@ const ReceiptList = props => {
     if(props.isLoading){
         //spinner
         return(
-        <p>Loading...</p>
+          <div>
+          <Spinner color='primary' style={{ width: '3rem', height: '3rem' }}/>
+          <br/>
+          Loading...</div>
         )
-    }
-
-  return (
-    <section className="receipt-list">
+      }
+      
+      return (
+        <section className="receipt-list">
+        <SearchReceipt />
       <div className="receipts">
         {props.receipts.map(receipt => (
           <Receipts
@@ -29,8 +34,6 @@ const ReceiptList = props => {
             merchant={receipt.merchant}
           />
         ))}
-        <AddReceipt />
-        <SearchReceipt />
       </div>
     </section>
   );
