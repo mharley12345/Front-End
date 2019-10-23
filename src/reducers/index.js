@@ -20,7 +20,8 @@ const initialState = {
       merchant: "",
       image_url: "",
       user_username: "",
-      description: ""
+      description: "",
+      amount_spent:""
     }
   ],
   isLoading: false,

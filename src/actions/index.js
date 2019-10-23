@@ -16,8 +16,7 @@ export const fetchReceipts = search => dispatch => {
     
     axiosWithAuth()
     .get("/auth/receipts/all")
-    .then(res => dispatch({ type: FETCH_SUCCESS_RECEIPTS, payload: res.data.filter(receipt =>
-        receipt.toLowerCase().includes(search.toLowerCase()))}))
+    .then(res => dispatch({ type: FETCH_SUCCESS_RECEIPTS, payload: res.data}))
     .catch(err => dispatch({ type: FETCH_FAILURE, payload: err}))
     
     
