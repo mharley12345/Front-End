@@ -27,8 +27,6 @@ const initialState = {
       merchant: "",
       image_url: "",
       user_username: "",
-
-
       description: "",
       amount_spent:""
 
@@ -65,13 +63,14 @@ export const reducer = (state = initialState, action) => {
       case ADD_RECEIPT:
         return{
           ...state,
+          isLoading: false,
           receipts:[
             ...state.receipts, {
               ...action.payload,
-              id: Date.now(),
               user_username: state.user.username
             }
-          ]
+          ],
+          error: action.payload
         }
       case DELETE_RECEIPT:
         return{
