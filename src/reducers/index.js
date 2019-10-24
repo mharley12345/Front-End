@@ -1,7 +1,7 @@
 
 
 
-import { START_FETCHING, FETCH_SUCCESS_RECEIPTS, FETCH_FAILURE, ADD_RECEIPT, DELETE_RECEIPT } from '../actions'
+import { START_FETCHING, FETCH_SUCCESS_RECEIPTS, FETCH_FAILURE, ADD_RECEIPT, DELETE_RECEIPT, LOGIN } from '../actions'
 
 
 const initialState = {
@@ -40,6 +40,17 @@ const initialState = {
 export const reducer = (state = initialState, action) => {
     switch(action.type){
 
+      case LOGIN:
+        return{
+          ...state,
+          user: {
+            ...state.user,
+            ...action.payload
+          },
+          isLoading: false,
+          error: ""
+
+        }
       case START_FETCHING:
         return{
           ...state,
@@ -67,7 +78,6 @@ export const reducer = (state = initialState, action) => {
           receipts:[
             ...state.receipts, {
               ...action.payload,
-              user_username: state.user.username
             }
           ],
           error: action.payload

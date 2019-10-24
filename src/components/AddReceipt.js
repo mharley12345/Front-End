@@ -1,20 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {Button,Col, Form, FormGroup, Label, Input, FormText, Row } from "reactstrap";
-import { Redirect } from "react-router-dom";
 import { connect } from 'react-redux';
 import { addReceipt } from "../actions";
 
 const AddReceipt = props => {
+  console.log('props', props)
   const [newReceipt, setNewReceipt] = useState({});
-
+console.log(newReceipt)
   const addNew = e => {
     e.preventDefault();
-    addReceipt(newReceipt);
-    props.history.push('/receipts')
+    props.addReceipt(newReceipt);
+    // props.history.push('/receipts')
   };
   const handleChange = e => {
     setNewReceipt({
       ...newReceipt,
+      user_username: props.user.username,
       [e.target.name]: e.target.value
       
     })
@@ -104,4 +105,12 @@ const AddReceipt = props => {
   );
 };
 
-export default connect(null,{ addReceipt })(AddReceipt);
+const mapStateToProps = state => {
+  return {
+      user: state.user,
+      isLoading: state.isLoading,
+      error: state.error
+  }
+}
+
+export default connect(mapStateToProps,{ addReceipt })(AddReceipt);
