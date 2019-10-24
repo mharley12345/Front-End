@@ -5,18 +5,7 @@ import { START_FETCHING, FETCH_SUCCESS_RECEIPTS, FETCH_FAILURE, ADD_RECEIPT, DEL
 
 
 const initialState = {
-  user: ""
-
-
-    // {
-    //   userid: "",
-    //   username: "",
-    //   email: "",
-    //   password: ""
-    // }
-
-
-  ,
+  user: "",
 
 
   receipts: [

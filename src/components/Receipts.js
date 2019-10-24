@@ -1,12 +1,18 @@
 import React from 'react';
 import Receipt from './Receipt.js';
-import {
-    Card, CardBody,
-    CardTitle, CardSubtitle
-  } from 'reactstrap';
+import {Card, CardBody, CardTitle, CardSubtitle } from 'reactstrap';
 
-const Receipts = (props) => {
-    return (
+  import { deleteReceipt } from '../actions'
+  import { connect } from 'react-redux'
+
+  const Receipts = props => {
+  console.log('check props', props)
+  
+  const handleDelete = e => {
+    props.deleteReceipt(props.id);
+    props.history.push('/receipts')}
+
+  return (
         <div>
          <Card key={props.id}>
            <CardBody>
@@ -15,10 +21,12 @@ const Receipts = (props) => {
              <CardSubtitle>{props.category}</CardSubtitle>
              <CardSubtitle>{props.merchant}</CardSubtitle>
             </CardBody>
+            <div><button>edit</button>  <button onClick={handleDelete}>delete</button></div>
          </Card>
             <Receipt />
         </div>
     );
 }
 
-export default Receipts;
+
+export default connect(null,{ deleteReceipt })(Receipts);
