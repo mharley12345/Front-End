@@ -5,15 +5,15 @@ import { START_FETCHING, FETCH_SUCCESS_RECEIPTS, FETCH_FAILURE, ADD_RECEIPT, DEL
 
 
 const initialState = {
-  user: 
+  user: ""
 
 
-    {
-      userid: "",
-      username: "",
-      email: "",
-      password: ""
-    }
+    // {
+    //   userid: "",
+    //   username: "",
+    //   email: "",
+    //   password: ""
+    // }
 
 
   ,
@@ -41,14 +41,15 @@ export const reducer = (state = initialState, action) => {
     switch(action.type){
 
       case LOGIN:
-        return{
+        console.log(action)
+        console.log('state', state)  
+      return{
           ...state,
-          user: {
-            ...state.user,
-            ...action.payload
-          },
+          user: action.payload,
           isLoading: false,
           error: ""
+
+          
 
         }
       case START_FETCHING:

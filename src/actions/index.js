@@ -37,5 +37,6 @@ export const deleteReceipt = () => dispatch => {
 }
 
 export const logUser = credentials => dispatch => {
-    dispatch({ type: LOGIN, payload: credentials})
+    console.log('credentials',credentials)
+    dispatch({ type: LOGIN, payload: credentials.username})
 }

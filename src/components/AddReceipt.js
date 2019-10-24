@@ -1,12 +1,21 @@
 import React, { useState } from "react";
-import {Button,Col, Form, FormGroup, Label, Input, FormText, Row } from "reactstrap";
-import { connect } from 'react-redux';
+import {
+  Button,
+  Col,
+  Form,
+  FormGroup,
+  Label,
+  Input,
+  FormText,
+  Row
+} from "reactstrap";
+import { connect } from "react-redux";
 import { addReceipt } from "../actions";
 
 const AddReceipt = props => {
-  console.log('props', props)
+  console.log("props", props);
   const [newReceipt, setNewReceipt] = useState({});
-console.log(newReceipt)
+  console.log(newReceipt);
   const addNew = e => {
     e.preventDefault();
     props.addReceipt(newReceipt);
@@ -14,11 +23,16 @@ console.log(newReceipt)
   };
   const handleChange = e => {
     setNewReceipt({
-      ...newReceipt,
+      date_of_transaction: "",
+      amount_spent: "",
+      category: "",
+      merchant: "",
+      image_url: "",
       user_username: props.user.username,
+      description: "",
+      ...newReceipt,
       [e.target.name]: e.target.value
-      
-    })
+    });
   };
   return (
     <Form onSubmit={addNew}>
@@ -32,7 +46,7 @@ console.log(newReceipt)
               type="date"
               name="date_of_transaction"
               value={newReceipt.date_of_transaction}
-              onChange = {handleChange}
+              onChange={handleChange}
             />
           </FormGroup>
         </Col>
@@ -41,10 +55,12 @@ console.log(newReceipt)
             <Label for="merchant" sm={2}>
               Merchant
             </Label>
-            <Input type="text" 
-                   name="merchant"
-                   value={newReceipt.merchant}
-                   onChange = {handleChange} />
+            <Input
+              type="text"
+              name="merchant"
+              value={newReceipt.merchant}
+              onChange={handleChange}
+            />
           </FormGroup>
         </Col>
       </Row>
@@ -59,7 +75,7 @@ console.log(newReceipt)
               name="amount_spent"
               value={newReceipt.amount_spent}
               placeholder="$0.00"
-              onChange = {handleChange}
+              onChange={handleChange}
             />
           </FormGroup>
         </Col>
@@ -68,10 +84,12 @@ console.log(newReceipt)
             <Label for="category" sm={2}>
               Category
             </Label>
-            <Input type="text"
-                   name="category" 
-                   value={newReceipt.category}
-                   onChange = {handleChange} />
+            <Input
+              type="text"
+              name="category"
+              value={newReceipt.category}
+              onChange={handleChange}
+            />
           </FormGroup>
         </Col>
       </Row>
@@ -83,7 +101,7 @@ console.log(newReceipt)
           type="textarea"
           name="description"
           value={newReceipt.description}
-          onChange = {handleChange}
+          onChange={handleChange}
         ></Input>
       </FormGroup>
       <FormGroup>
@@ -94,7 +112,7 @@ console.log(newReceipt)
           type="file"
           name="image_url"
           value={newReceipt.image_url}
-          onChange = {handleChange}
+          onChange={handleChange}
         ></Input>
         <FormText color="muted">
           Upload an image of your receipt in .jpg format.
@@ -106,11 +124,15 @@ console.log(newReceipt)
 };
 
 const mapStateToProps = state => {
+ console.log('add state', state)
   return {
-      user: state.user,
-      isLoading: state.isLoading,
-      error: state.error
-  }
-}
+    user: state.user,
+    isLoading: state.isLoading,
+    error: state.error
+  };
+};
 
-export default connect(mapStateToProps,{ addReceipt })(AddReceipt);
+export default connect(
+  mapStateToProps,
+  { addReceipt }
+)(AddReceipt);
