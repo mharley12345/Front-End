@@ -22,7 +22,16 @@ const initialState = {
 
     }
   ],
-  selectedReceipt:{},
+  selectedReceipt:{
+    receiptid: "",
+      date_of_transaction: "",
+      category: "",
+      merchant: "",
+      image_url: "",
+      user_username: "",
+      description: "",
+      amount_spent:""
+  },
   isLoading: false,
   error: ""
 };
