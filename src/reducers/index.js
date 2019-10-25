@@ -1,22 +1,11 @@
 
 
 
-import { START_FETCHING, FETCH_SUCCESS_RECEIPTS, FETCH_FAILURE, ADD_RECEIPT, DELETE_RECEIPT, LOGIN } from '../actions'
+import { START_FETCHING, FETCH_SUCCESS_RECEIPTS, FETCH_FAILURE, ADD_RECEIPT, DELETE_RECEIPT, LOGIN, SELECT_RECEIPT } from '../actions'
 
 
 const initialState = {
-  user: ""
-
-
-    // {
-    //   userid: "",
-    //   username: "",
-    //   email: "",
-    //   password: ""
-    // }
-
-
-  ,
+  user: "",
 
 
   receipts: [
@@ -33,6 +22,7 @@ const initialState = {
 
     }
   ],
+  selectedReceipt:{},
   isLoading: false,
   error: ""
 };
@@ -81,7 +71,7 @@ export const reducer = (state = initialState, action) => {
               ...action.payload,
             }
           ],
-          error: action.payload
+          error: ''
         }
       case DELETE_RECEIPT:
         return{
@@ -90,7 +80,13 @@ export const reducer = (state = initialState, action) => {
             ...action.payload
           ]
         }
-
+      case SELECT_RECEIPT:
+        return{
+          ...state,
+          selectedReceipt: action.payload,
+          isLoading: false,
+          
+        }
       default: 
 
         return state

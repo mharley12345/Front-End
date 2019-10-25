@@ -19,7 +19,7 @@ const AddReceipt = props => {
   const addNew = e => {
     e.preventDefault();
     props.addReceipt(newReceipt);
-    // props.history.push('/receipts')
+    props.history.push('/receipts')
   };
   const handleChange = e => {
     setNewReceipt({
@@ -28,7 +28,7 @@ const AddReceipt = props => {
       category: "",
       merchant: "",
       image_url: "",
-      user_username: props.user.username,
+      user_username: props.user,
       description: "",
       ...newReceipt,
       [e.target.name]: e.target.value

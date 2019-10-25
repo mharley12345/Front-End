@@ -40,7 +40,8 @@ const ReceiptList = props => {
 
         ).map(receipt => (
           <Receipts
-            key={receipt.id}
+            history={props.history}
+            id={receipt.id}
             date={receipt.date_of_transaction}
             amount={receipt.amount_spent}
             category={receipt.category}
