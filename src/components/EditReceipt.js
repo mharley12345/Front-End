@@ -1,28 +1,28 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {Button,Col, Form, FormGroup, Label, Input, FormText, Row } from "reactstrap";
-import { Redirect } from "react-router-dom";
 import { connect } from 'react-redux';
 import { editReceipt } from "../actions";
-import { statement } from "../../../../../../AppData/Local/Microsoft/TypeScript/3.6/node_modules/@types/babel__template";
 
 const EditReceipt = props => {
-  const [editedReceipt, setEditedReceipt] = useState({});
+  const [editedReceipt, setEditedReceipt] = useState(props.selectedReceipt);
+  console.log('edit props', props)
 
   const edit = e => {
     e.preventDefault();
-    editReceipt(editedReceipt);
-    props.history.push('/receipts')
+    editReceipt(props);
+    // props.history.push('/receipts')
   };
+  
   const handleChange = e => {
     setEditedReceipt({
         
-        ...newReceipt,
+        ...editedReceipt,
       [e.target.name]: e.target.value
       
     })
   };
   return (
-    <Form onSubmit={addNew}>
+    <Form onSubmit={edit}>
       <Row form>
         <Col md={6}>
           <FormGroup>
@@ -32,7 +32,7 @@ const EditReceipt = props => {
             <Input
               type="date"
               name="date_of_transaction"
-              value={newReceipt.date_of_transaction}
+              value={editedReceipt.date_of_transaction}
               onChange = {handleChange}
             />
           </FormGroup>
@@ -44,7 +44,7 @@ const EditReceipt = props => {
             </Label>
             <Input type="text" 
                    name="merchant"
-                   value={newReceipt.merchant}
+                   value={editedReceipt.merchant}
                    onChange = {handleChange} />
           </FormGroup>
         </Col>
@@ -58,7 +58,7 @@ const EditReceipt = props => {
             <Input
               type="text"
               name="amount_spent"
-              value={newReceipt.amount_spent}
+              value={editedReceipt.amount_spent}
               placeholder="$0.00"
               onChange = {handleChange}
             />
@@ -71,7 +71,7 @@ const EditReceipt = props => {
             </Label>
             <Input type="text"
                    name="category" 
-                   value={newReceipt.category}
+                   value={editedReceipt.category}
                    onChange = {handleChange} />
           </FormGroup>
         </Col>
@@ -83,7 +83,7 @@ const EditReceipt = props => {
         <Input
           type="textarea"
           name="description"
-          value={newReceipt.description}
+          value={editedReceipt.description}
           onChange = {handleChange}
         ></Input>
       </FormGroup>
@@ -94,7 +94,7 @@ const EditReceipt = props => {
         <Input
           type="file"
           name="image_url"
-          value={newReceipt.image_url}
+          value={editedReceipt.image_url}
           onChange = {handleChange}
         ></Input>
         <FormText color="muted">
@@ -108,9 +108,9 @@ const EditReceipt = props => {
 
 const mapStateToProps = state => {
         return{
-        user: state.user,
-        receipts: 
+        selectedReceipt: state.selectedReceipt
+        
         }
 }
 
-export default connect(null,{ addReceipt })(AddReceipt);
+export default connect(mapStateToProps,{ editReceipt })(EditReceipt);
