@@ -1,7 +1,7 @@
 /*dependencies*/
 import React, { useState } from 'react';
 import { Redirect, Link } from 'react-router-dom';
-import { Form, FormGroup, Label, Input, FormFeedback, FormText, Button } from 'reactstrap'
+import { Form, FormGroup, Label, Input, FormText, Button } from 'reactstrap'
 import axios from 'axios';
 
 const SignupForm = (props) => {

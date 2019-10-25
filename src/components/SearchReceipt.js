@@ -1,10 +1,23 @@
 import React from 'react';
 
-const SearchReceipt = () => {
+const SearchReceipt = (props) => {
     return (
-        <div>
+        <div className="search-form">
+         <form className="search">
+            <input 
+              type="text"
+              onChange={props.handleChange}
+              value={props.search}
+              name="name"
+              tabIndex="0"
+              className="prompt search-name"
 
-        </div>
+              placeholder="search receipts"
+              autoComplete="off"
+            />
+         </form>
+    </div>
+
     );
 }
 

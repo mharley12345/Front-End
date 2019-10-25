@@ -1,11 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { fetchReceipts } from "../actions";
 import Receipts from "./Receipts.js";
 import AddReceipt from "./AddReceipt.js";
 import SearchReceipt from "./SearchReceipt.js";
 import { connect } from 'react-redux';
+import { Spinner } from 'reactstrap';
 
 const ReceiptList = props => {
+  const [search, setSearch] = useState('');
+  
+  
   useEffect(() => {
     props.fetchReceipts();
   }, []);
@@ -13,24 +17,37 @@ const ReceiptList = props => {
     if(props.isLoading){
         //spinner
         return(
-        <p>Loading...</p>
+          <div>
+          <Spinner color='primary' style={{ width: '3rem', height: '3rem' }}/>
+          <br/>
+          Loading...</div>
         )
-    }
+      }
+      
+      const handleChange = event => {
+        setSearch(event.target.value)
+      }
 
-  return (
-    <section className="receipt-list">
+      return (
+        <section className="receipt-list">
+        <SearchReceipt handleChange={handleChange}/>
       <div className="receipts">
-        {props.receipts.map(receipt => (
+        {props.receipts.filter(receipt =>
+        receipt.merchant.toString().toLowerCase().includes(search.toLowerCase())
+        || receipt.amount_spent.toString().toLowerCase().includes(search.toLowerCase())
+        || receipt.category.toString().toLowerCase().includes(search.toLowerCase())
+        || receipt.date_of_transaction.toString().toLowerCase().includes(search.toLowerCase())
+
+        ).map(receipt => (
           <Receipts
-            key={receipt.id}
+            history={props.history}
+            id={receipt.id}
             date={receipt.date_of_transaction}
             amount={receipt.amount_spent}
             category={receipt.category}
             merchant={receipt.merchant}
           />
         ))}
-        <AddReceipt />
-        <SearchReceipt />
       </div>
     </section>
   );

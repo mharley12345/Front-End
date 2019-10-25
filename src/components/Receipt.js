@@ -1,12 +1,16 @@
 import React from 'react';
-import EditReceipt from './EditReceipt.js';
 
-const Receipt = () => {
+
+
+const Receipt = (props) => {
+
     return (
-        <div>
-            <EditReceipt />
+        <div className="receipt">
+
         </div>
     );
 }
 
+
 export default Receipt;
+

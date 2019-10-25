@@ -1,3 +1,4 @@
+
 # Receipt Tracker
 
 ## About
@@ -12,4 +13,6 @@
  - React-Strap
  - Bootstrap
 
-##Important Notes
+
+## Important Notes
+
