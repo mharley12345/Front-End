@@ -48,11 +48,12 @@ export const logUser = credentials => dispatch => {
 
 }
 
-export const editReceipt = props => dispatch => {
+export const editReceipt = (props, editedReceipt) => dispatch => {
     dispatch({ type: START_FETCHING })
+    console.log('edit function props', editedReceipt)
 
     axiosWithAuth()
-    .put(`/auth/receipts/${props.editedReceipt.receipt.id}`, props.editedReceipt)
+    .put(`/auth/receipts/${editedReceipt.id}`, editedReceipt)
     .then(res => props.history.push('/receipts'))
     .catch(err => dispatch({ type: FETCH_FAILURE, payload: err}))
 }

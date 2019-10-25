@@ -8,14 +8,17 @@ const EditReceipt = props => {
   console.log('edit props', props)
 
   const edit = e => {
+    console.log('inside edit', editedReceipt)
     e.preventDefault();
-    editReceipt(props);
+    console.log(editedReceipt)
+    
+    props.editReceipt(props, editedReceipt);
     // props.history.push('/receipts')
   };
   
   const handleChange = e => {
     setEditedReceipt({
-        
+        ...props.selectedReceipt,
         ...editedReceipt,
       [e.target.name]: e.target.value
       
@@ -101,7 +104,7 @@ const EditReceipt = props => {
           Upload an image of your receipt in .jpg format.
         </FormText>
       </FormGroup>
-      <Button>Submit</Button>
+      <Button type='submit'>Submit</Button>
     </Form>
   );
 };
