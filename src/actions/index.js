@@ -48,7 +48,7 @@ export const logUser = credentials => dispatch => {
     dispatch({ type: LOGIN, payload: credentials.username})
 
 }
-
+/*TODO FIX EDIT*/
 export const editReceipt = props => dispatch => {
  
 
