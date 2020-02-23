@@ -15,6 +15,9 @@ const Navigation = () => {
             <NavItem>
                 <NavLink to="/add-receipt"  tag={RRNavlink}>Add a Receipt</NavLink>
             </NavItem> 
+            <NavItem>
+              <NavLink to="/home" onClick={() => localStorage.clear() } tag={RRNavlink}>Log Out</NavLink>
+            </NavItem>
          </Nav>
         </div>
     );

@@ -51,12 +51,12 @@ export const logUser = credentials => dispatch => {
 
 export const editReceipt = (props, editedReceipt) => dispatch => {
     const { editedReceipt,Id } = props.receiptID
-    console.log("HELLO TODD",editedReceipt)
+
     dispatch({ type: START_FETCHING })
     
 
     axiosWithAuth()
-    .get(`/auth/receipts/${Id}`)
+    .put(`/auth/receipts/${Id}`)
     .then(res => console.log("Edit Axios Call",res), editReceipt.history.push('/receipts'))
     .catch(err => dispatch({ type: FETCH_FAILURE, payload: err}))
 }
