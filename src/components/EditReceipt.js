@@ -4,21 +4,23 @@ import { connect } from 'react-redux';
 import { editReceipt } from "../actions";
 
 const EditReceipt = props => {
+   const { selectedReceipt } = props 
+   console.log("PROPS",props)
   const [editedReceipt, setEditedReceipt] = useState(props.selectedReceipt);
-  console.log('edit props', props)
+  console.log('edit props', editedReceipt  )
 
   const edit = e => {
     console.log('inside edit', editedReceipt)
     e.preventDefault();
     console.log(editedReceipt)
     
-    props.editReceipt(props, editedReceipt);
+    editReceipt(editedReceipt);
     // props.history.push('/receipts')
   };
   
   const handleChange = e => {
     setEditedReceipt({
-        ...props.selectedReceipt,
+        ...selectedReceipt,
         ...editedReceipt,
       [e.target.name]: e.target.value
       

@@ -35,8 +35,9 @@ export const addReceipt = newReceipt => dispatch => {
 
 export const deleteReceipt = props => dispatch => {
     
+    console.log("DELETE ACTION",props,props.id)
     axiosWithAuth()
-    .delete(`/auth/receipts/${props.id}/del`)
+    .delete(`/auth/receipts/${props}/del`)
     .then(res => props.history.push('/receipts'))
     .catch(err => dispatch({ type: FETCH_FAILURE, payload: err}))
     
@@ -49,12 +50,14 @@ export const logUser = credentials => dispatch => {
 }
 
 export const editReceipt = (props, editedReceipt) => dispatch => {
+    const { editedReceipt,Id } = props.receiptID
+    console.log("HELLO TODD",editedReceipt)
     dispatch({ type: START_FETCHING })
-    console.log('edit function props', editedReceipt)
+    
 
     axiosWithAuth()
-    .put(`/auth/receipts/${editedReceipt.id}`, editedReceipt)
-    .then(res => props.history.push('/receipts'))
+    .get(`/auth/receipts/${Id}`)
+    .then(res => console.log("Edit Axios Call",res), editReceipt.history.push('/receipts'))
     .catch(err => dispatch({ type: FETCH_FAILURE, payload: err}))
 }
 

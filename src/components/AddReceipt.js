@@ -45,7 +45,7 @@ const AddReceipt = props => {
             <Input
               type="date"
               name="date_of_transaction"
-              value={newReceipt.date_of_transaction}
+              value={props.date_of_transaction}
               onChange={handleChange}
             />
           </FormGroup>

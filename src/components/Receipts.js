@@ -8,7 +8,9 @@ import {Card, CardBody, CardTitle, CardSubtitle } from 'reactstrap';
   console.log('check props', props)
   
   const handleDelete = e => {
+ 
     props.deleteReceipt(props.id, props.history);
+    console.log("THIS IS THE HANDLEDELETE",props.id)
     // props.history.push('/receipts')
   }
 
@@ -26,7 +28,7 @@ import {Card, CardBody, CardTitle, CardSubtitle } from 'reactstrap';
              <CardSubtitle>{props.category}</CardSubtitle>
              <CardSubtitle>{props.merchant}</CardSubtitle>
             </CardBody>
-            <div><button onClick={handleEdit}>edit</button>  <button onClick={handleDelete}>delete</button></div>
+            <div><button onClick={handleEdit}>edit</button>  <button onClick={()=> handleDelete()}>delete</button></div>
          </Card>
             <Receipt />
         </div>
