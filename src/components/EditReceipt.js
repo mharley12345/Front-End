@@ -11,7 +11,7 @@ const EditReceipt = props => {
 
   const edit = e => {
     console.log('inside edit', editedReceipt)
-    e.preventDefault();
+  
     console.log(editedReceipt)
     
     editReceipt(editedReceipt);
@@ -106,7 +106,7 @@ const EditReceipt = props => {
           Upload an image of your receipt in .jpg format.
         </FormText>
       </FormGroup>
-      <Button type='submit'>Submit</Button>
+      <Button onClick={()=> edit()}>Submit</Button>
     </Form>
   );
 };
