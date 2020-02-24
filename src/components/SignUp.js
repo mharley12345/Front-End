@@ -1,27 +1,26 @@
 /*dependencies*/
-import React, { useState } from 'react';
-import { Redirect, Link } from 'react-router-dom';
-import { Form, FormGroup, Label, Input, FormText, Button } from 'reactstrap'
 import axios from 'axios';
+import React, {useState} from 'react';
+import {Link, Redirect} from 'react-router-dom';
+import {Button, Form, FormGroup, FormText, Input, Label} from 'reactstrap'
 
-const SignupForm = (props) => {
-    const [credentials, setCredentials] = useState({});
+const SignupForm =
+    (props) => {
+      const [credentials, setCredentials] = useState({});
 
-    const handleChange = e => {
-        setCredentials({
-        ...credentials,
-        [e.target.name]: e.target.value
-        });
-    };
-// https://api-receipt-tracker.herokuapp.com
+      const handleChange = e => {
+        setCredentials({...credentials, [e.target.name] : e.target.value});
+      };
+      // https://api-receipt-tracker.herokuapp.com
     const signup = e => {
-        e.preventDefault();
-       const successKey = localStorage.getItem('successKey');
-        axios
-        .post('https://api-receipt-tracker.herokuapp.com/api/register', credentials) 
+    e.preventDefault();
+    const successKey = localStorage.getItem('successKey');
+    axios
+        .post('https://api-receipt-tracker.herokuapp.com/api/register',
+              credentials)
         .then(res => {
-            localStorage.setItem('successKey', res.data.payload);
-            props.history.push('/')
+          localStorage.setItem('successKey', res.data.payload);
+          props.history.push('/')
         })
         .catch(err => console.log(err.response))
     }
@@ -44,10 +43,11 @@ const SignupForm = (props) => {
                 <FormGroup>
                     <Label for='email' hidden>Email</Label>
                     <Input type = 'email'
-                            name = 'email'
-                            placeholder = 'Email'
+    name = 'email'
+    placeholder = 'Email'
                             value={credentials.email}
-                            onChange = {handleChange}
+                            onChange = {
+    handleChange}
                             />
                 </FormGroup>
                 <FormGroup>
@@ -75,7 +75,6 @@ const SignupForm = (props) => {
             </>
         )
     )
-
-}
+    }
 
 export default SignupForm

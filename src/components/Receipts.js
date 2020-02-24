@@ -1,10 +1,12 @@
 import React from 'react';
-import Receipt from './Receipt.js';
-import {Card, CardBody, CardTitle, CardSubtitle } from 'reactstrap';
-  import { deleteReceipt, selectReceipt } from '../actions'
-  import { connect } from 'react-redux'
+import {connect} from 'react-redux'
+import {Card, CardBody, CardSubtitle, CardTitle} from 'reactstrap';
 
-  const Receipts = props => {
+import {deleteReceipt, selectReceipt} from '../actions'
+
+import Receipt from './Receipt.js';
+
+const Receipts = props => {
   console.log('check props', props)
   
   const handleDelete = e => {

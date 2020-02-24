@@ -1,16 +1,17 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
+import {connect} from "react-redux";
 import {
   Button,
   Col,
   Form,
   FormGroup,
-  Label,
-  Input,
   FormText,
+  Input,
+  Label,
   Row
 } from "reactstrap";
-import { connect } from "react-redux";
-import { addReceipt } from "../actions";
+
+import {addReceipt} from "../actions";
 
 const AddReceipt = props => {
   console.log("props", props);

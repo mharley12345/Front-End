@@ -1,8 +1,18 @@
-import React, { useState } from "react";
-import {Button,Col, Form, FormGroup, Label, Input, FormText, Row } from "reactstrap";
-import { connect } from 'react-redux';
-import { editReceipt, selectReceipt } from "../actions";
-import { axiosWithAuth } from "../utils/AxiosWithAuth";
+import React, {useState} from "react";
+import {connect} from 'react-redux';
+import {
+  Button,
+  Col,
+  Form,
+  FormGroup,
+  FormText,
+  Input,
+  Label,
+  Row
+} from "reactstrap";
+
+import {editReceipt, selectReceipt} from "../actions";
+import {axiosWithAuth} from "../utils/AxiosWithAuth";
 
 const EditReceipt = props => {
 

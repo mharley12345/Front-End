@@ -1,10 +1,11 @@
 /*dependencies*/
-import React, { useState } from "react";
-import { axiosWithAuth } from "../utils/AxiosWithAuth";
-import { Redirect, Link } from "react-router-dom";
-import { Form, FormGroup, Label, Input, FormText, Button } from "reactstrap";
-import { logUser } from "../actions";
-import { connect } from "react-redux";
+import React, {useState} from "react";
+import {connect} from "react-redux";
+import {Link, Redirect} from "react-router-dom";
+import {Button, Form, FormGroup, FormText, Input, Label} from "reactstrap";
+
+import {logUser} from "../actions";
+import {axiosWithAuth} from "../utils/AxiosWithAuth";
 
 const LoginForm = props => {
   const [credentials, setCredentials] = useState({});
