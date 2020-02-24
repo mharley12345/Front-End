@@ -18,7 +18,7 @@ const SignupForm = (props) => {
         e.preventDefault();
        const successKey = localStorage.getItem('successKey');
         axios
-        .post('http://localhost:5000/api/register', credentials) 
+        .post('https://api-receipt-tracker.herokuapp.com/register', credentials) 
         .then(res => {
             localStorage.setItem('successKey', res.data.payload);
             props.history.push('/')
