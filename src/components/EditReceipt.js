@@ -1,27 +1,46 @@
 import React, { useState } from "react";
 import {Button,Col, Form, FormGroup, Label, Input, FormText, Row } from "reactstrap";
 import { connect } from 'react-redux';
-import { editReceipt } from "../actions";
+import { editReceipt, selectReceipt } from "../actions";
+import { axiosWithAuth } from "../utils/AxiosWithAuth";
 
 const EditReceipt = props => {
-   const { selectedReceipt } = props 
+
    console.log("PROPS",props)
   const [editedReceipt, setEditedReceipt] = useState(props.selectedReceipt);
-  console.log('edit props', editedReceipt  )
+ 
 
   const edit = e => {
-    console.log('inside edit', editedReceipt)
+    e.preventDefault(); 
+    e.stopPropagation();
   
-    console.log(editedReceipt)
-    
-    editReceipt(editedReceipt);
-    // props.history.push('/receipts')
+    axiosWithAuth()
+    .put(`/auth/receipts/${editedReceipt.id}/edit`,editedReceipt)
+    .then(props.editReceipt(props))
+    .then(res => {
+        const changes = res.data.changes
+        
+
+   
+        changes.history.push('/home')
+  
+    })
+    .catch(err => {console.log(err)})
+  
+ 
+   
+
+ 
+     
   };
   
   const handleChange = e => {
+  
+
+    e.preventDefault()
     setEditedReceipt({
-        ...selectedReceipt,
-        ...editedReceipt,
+        ...props.selectedReceipt,
+       
       [e.target.name]: e.target.value
       
     })
@@ -99,22 +118,27 @@ const EditReceipt = props => {
         <Input
           type="file"
           name="image_url"
-          value={editedReceipt.image_url}
+          value={''}
           onChange = {handleChange}
         ></Input>
         <FormText color="muted">
           Upload an image of your receipt in .jpg format.
         </FormText>
       </FormGroup>
-      <Button onClick={()=> edit()}>Submit</Button>
+      <Button type="submit" onSubmit={edit}>Submit</Button>
     </Form>
   );
 };
 
 const mapStateToProps = state => {
         return{
-        selectedReceipt: state.selectedReceipt
-        
+        selectedReceipt: state.selectedReceipt,
+        receipts:[
+         
+          {
+            receiptid:selectReceipt.id,...selectReceipt
+          }
+        ]
         }
 }
 

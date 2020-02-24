@@ -55,7 +55,8 @@ export const reducer = (state = initialState, action) => {
         return{
           ...state,
           isLoading: true,
-          error: ''
+          error: '',
+          user:state.user
         };
       case FETCH_SUCCESS_RECEIPTS:
         return{
@@ -69,7 +70,8 @@ export const reducer = (state = initialState, action) => {
         return{
           ...state,
           isLoading: false,
-          error: action.payload
+          error: action.payload,
+          user:state.user
         }
 
       case ADD_RECEIPT:
@@ -89,20 +91,23 @@ export const reducer = (state = initialState, action) => {
           ...state,
           receipts:[
             ...action.payload
-          ]
+          ],
+          user:state.user
         }
       case SELECT_RECEIPT:
         return{
           ...state,
           selectedReceipt: action.payload,
           isLoading: false,
+          user:state.user,
           
         }
         case EDIT_RECEIPT:
           return{
             ...state,
-            selectedReceipt:action.SELECT_RECEIPT.receiptid,
+            selectedReceipt:action.payload,
             isLoading:false,
+            user:state.user
           }
       default: 
 

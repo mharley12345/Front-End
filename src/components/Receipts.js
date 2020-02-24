@@ -9,9 +9,9 @@ import {Card, CardBody, CardTitle, CardSubtitle } from 'reactstrap';
   
   const handleDelete = e => {
  
-    props.deleteReceipt(props.id, props.history);
-    console.log("THIS IS THE HANDLEDELETE",props.id)
-    // props.history.push('/receipts')
+    props.deleteReceipt(props);
+    console.log("THIS IS THE HANDLEDELETE",props.id,props.history)
+     props.history.push('/home')
   }
 
   const handleEdit = e => {

@@ -21,8 +21,9 @@ const LoginForm = props => {
     e.preventDefault();
     axiosWithAuth()
       .post("/login", credentials)
-      .then(props.logUser(credentials))
+      .then(props.logUser(credentials.username))
       .then(res => {
+       
         localStorage.setItem("token", res.data.token);
         (props.history.push("/home"))
 
