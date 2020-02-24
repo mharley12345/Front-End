@@ -1,11 +1,11 @@
 /*dependencies*/
-import React, {useState} from "react";
-import {connect} from "react-redux";
-import {Link, Redirect} from "react-router-dom";
-import {Button, Form, FormGroup, FormText, Input, Label} from "reactstrap";
+import React, { useState } from "react";
+import { connect } from "react-redux";
+import { Link, Redirect } from "react-router-dom";
+import { Button, Form, FormGroup, FormText, Input, Label } from "reactstrap";
 
-import {logUser} from "../actions";
-import {axiosWithAuth} from "../utils/AxiosWithAuth";
+import { logUser } from "../actions";
+import { axiosWithAuth } from "../utils/AxiosWithAuth";
 
 const LoginForm = props => {
   const [credentials, setCredentials] = useState({});
@@ -24,10 +24,8 @@ const LoginForm = props => {
       .post("/login", credentials)
       .then(props.logUser(credentials.username))
       .then(res => {
-       
         localStorage.setItem("token", res.data.token);
-        (props.history.push("/home"))
-
+        props.history.push("/home");
       })
       .catch(err => console.log(err.response));
   };
@@ -70,7 +68,4 @@ const LoginForm = props => {
   );
 };
 
-export default connect(
-  null,
-  { logUser }
-)(LoginForm);
+export default connect(null, { logUser })(LoginForm);

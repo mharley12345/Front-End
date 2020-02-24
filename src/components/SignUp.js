@@ -1,80 +1,90 @@
 /*dependencies*/
-import axios from 'axios';
-import React, {useState} from 'react';
-import {Link, Redirect} from 'react-router-dom';
-import {Button, Form, FormGroup, FormText, Input, Label} from 'reactstrap'
+import axios from "axios";
+import React, { useState } from "react";
+import { Link, Redirect } from "react-router-dom";
+import { Button, Form, FormGroup, FormText, Input, Label } from "reactstrap";
 
-const SignupForm =
-    (props) => {
-      const [credentials, setCredentials] = useState({});
+const SignupForm = props => {
+  const [credentials, setCredentials] = useState({});
 
-      const handleChange = e => {
-        setCredentials({...credentials, [e.target.name] : e.target.value});
-      };
-      // https://api-receipt-tracker.herokuapp.com
-    const signup = e => {
+  const handleChange = e => {
+    setCredentials({ ...credentials, [e.target.name]: e.target.value });
+  };
+  // https://api-receipt-tracker.herokuapp.com
+  const signup = e => {
     e.preventDefault();
-    const successKey = localStorage.getItem('successKey');
+    const successKey = localStorage.getItem("successKey");
     axios
-        .post('https://api-receipt-tracker.herokuapp.com/api/register',
-              credentials)
-        .then(res => {
-          localStorage.setItem('successKey', res.data.payload);
-          props.history.push('/')
-        })
-        .catch(err => console.log(err.response))
-    }
+      .post(
+        "https://api-receipt-tracker.herokuapp.com/api/register",
+        credentials
+      )
+      .then(res => {
+        localStorage.setItem("successKey", res.data.payload);
+        props.history.push("/");
+      })
+      .catch(err => console.log(err.response));
+  };
 
-    return(
-        localStorage.getItem('token') ? (
-            <Redirect to='/' />
-        ) : (
-            <>
-            <Form onSubmit={signup}>
-                <FormGroup>
-                    <Label for='username' hidden>Username</Label>
-                    <Input type = 'username'
-                            name = 'username'
-                            placeholder = 'Username'
-                            value={credentials.username}
-                            onChange = {handleChange}
-                            />
-                </FormGroup>
-                <FormGroup>
-                    <Label for='email' hidden>Email</Label>
-                    <Input type = 'email'
-    name = 'email'
-    placeholder = 'Email'
-                            value={credentials.email}
-                            onChange = {
-    handleChange}
-                            />
-                </FormGroup>
-                <FormGroup>
-                <Label for='password' hidden>Password</Label>
-                    <Input type = 'password'
-                            name = 'password'
-                            placeholder = 'Password'
-                            value = {credentials.password}
-                            onChange = {handleChange}
-                            />
-                </FormGroup>
-           
-                <FormGroup>
-                <Label for='confirm_password' hidden>Confirm Password</Label>
-                    <Input type = 'password'
-                            name = 'confirm_password'
-                            placeholder = 'Confirm Password'
-                            />
-                </FormGroup>
-                <Button>Sign Up</Button>
-                <FormText>Already a member? Click <Link to='/'>
-                    here
-                </Link> to log in!</FormText>
-            </Form>
-            </>
-        )
-    )
-    }
+  return localStorage.getItem("token") ? (
+    <Redirect to="/" />
+  ) : (
+    <>
+      <Form onSubmit={signup}>
+        <FormGroup>
+          <Label for="username" hidden>
+            Username
+          </Label>
+          <Input
+            type="username"
+            name="username"
+            placeholder="Username"
+            value={credentials.username}
+            onChange={handleChange}
+          />
+        </FormGroup>
+        <FormGroup>
+          <Label for="email" hidden>
+            Email
+          </Label>
+          <Input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={credentials.email}
+            onChange={handleChange}
+          />
+        </FormGroup>
+        <FormGroup>
+          <Label for="password" hidden>
+            Password
+          </Label>
+          <Input
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={credentials.password}
+            onChange={handleChange}
+          />
+        </FormGroup>
 
-export default SignupForm
+        <FormGroup>
+          <Label for="confirm_password" hidden>
+            Confirm Password
+          </Label>
+          <Input
+            type="password"
+            name="confirm_password"
+            placeholder="Confirm Password"
+          />
+        </FormGroup>
+        <Button>Sign Up</Button>
+        <FormText>
+          Already a member? Click <Link to="/">here</Link> to log in!
+        </FormText>
+      </Form>
+    </>
+  );
+};
+
+export default SignupForm;

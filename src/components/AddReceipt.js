@@ -1,5 +1,5 @@
-import React, {useState} from "react";
-import {connect} from "react-redux";
+import React, { useState } from "react";
+import { connect } from "react-redux";
 import {
   Button,
   Col,
@@ -11,7 +11,7 @@ import {
   Row
 } from "reactstrap";
 
-import {addReceipt} from "../actions";
+import { addReceipt } from "../actions";
 
 const AddReceipt = props => {
   console.log("props", props);
@@ -20,7 +20,7 @@ const AddReceipt = props => {
   const addNew = e => {
     e.preventDefault();
     props.addReceipt(newReceipt);
-    props.history.push('/receipts')
+    props.history.push("/receipts");
   };
   const handleChange = e => {
     setNewReceipt({
@@ -125,7 +125,7 @@ const AddReceipt = props => {
 };
 
 const mapStateToProps = state => {
- console.log('add state', state)
+  console.log("add state", state);
   return {
     user: state.user,
     isLoading: state.isLoading,
@@ -133,7 +133,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  { addReceipt }
-)(AddReceipt);
+export default connect(mapStateToProps, { addReceipt })(AddReceipt);

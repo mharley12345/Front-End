@@ -1,5 +1,5 @@
-import React, {useState} from "react";
-import {connect} from 'react-redux';
+import React, { useState } from "react";
+import { connect } from "react-redux";
 import {
   Button,
   Col,
@@ -11,49 +11,37 @@ import {
   Row
 } from "reactstrap";
 
-import {editReceipt, selectReceipt} from "../actions";
-import {axiosWithAuth} from "../utils/AxiosWithAuth";
+import { editReceipt, selectReceipt } from "../actions";
+import { axiosWithAuth } from "../utils/AxiosWithAuth";
 
 const EditReceipt = props => {
-
-   console.log("PROPS",props)
+  console.log("PROPS", props);
   const [editedReceipt, setEditedReceipt] = useState(props.selectedReceipt);
- 
 
   const edit = e => {
-    e.preventDefault(); 
+    e.preventDefault();
     e.stopPropagation();
-  
+
     axiosWithAuth()
-    .put(`/auth/receipts/${editedReceipt.id}/edit`,editedReceipt)
-    .then(props.editReceipt(props))
-    .then(res => {
-        const changes = res.data.changes
-        
+      .put(`/auth/receipts/${editedReceipt.id}/edit`, editedReceipt)
+      .then(props.editReceipt(props))
+      .then(res => {
+        const changes = res.data.changes;
 
-   
-        changes.history.push('/home')
-  
-    })
-    .catch(err => {console.log(err)})
-  
- 
-   
-
- 
-     
+        changes.history.push("/home");
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
-  
-  const handleChange = e => {
-  
 
-    e.preventDefault()
+  const handleChange = e => {
+    e.preventDefault();
     setEditedReceipt({
-        ...props.selectedReceipt,
-       
+      ...props.selectedReceipt,
+
       [e.target.name]: e.target.value
-      
-    })
+    });
   };
   return (
     <Form onSubmit={edit}>
@@ -67,7 +55,7 @@ const EditReceipt = props => {
               type="date"
               name="date_of_transaction"
               value={editedReceipt.date_of_transaction}
-              onChange = {handleChange}
+              onChange={handleChange}
             />
           </FormGroup>
         </Col>
@@ -76,10 +64,12 @@ const EditReceipt = props => {
             <Label for="merchant" sm={2}>
               Merchant
             </Label>
-            <Input type="text" 
-                   name="merchant"
-                   value={editedReceipt.merchant}
-                   onChange = {handleChange} />
+            <Input
+              type="text"
+              name="merchant"
+              value={editedReceipt.merchant}
+              onChange={handleChange}
+            />
           </FormGroup>
         </Col>
       </Row>
@@ -94,7 +84,7 @@ const EditReceipt = props => {
               name="amount_spent"
               value={editedReceipt.amount_spent}
               placeholder="$0.00"
-              onChange = {handleChange}
+              onChange={handleChange}
             />
           </FormGroup>
         </Col>
@@ -103,10 +93,12 @@ const EditReceipt = props => {
             <Label for="category" sm={2}>
               Category
             </Label>
-            <Input type="text"
-                   name="category" 
-                   value={editedReceipt.category}
-                   onChange = {handleChange} />
+            <Input
+              type="text"
+              name="category"
+              value={editedReceipt.category}
+              onChange={handleChange}
+            />
           </FormGroup>
         </Col>
       </Row>
@@ -118,7 +110,7 @@ const EditReceipt = props => {
           type="textarea"
           name="description"
           value={editedReceipt.description}
-          onChange = {handleChange}
+          onChange={handleChange}
         ></Input>
       </FormGroup>
       <FormGroup>
@@ -128,28 +120,30 @@ const EditReceipt = props => {
         <Input
           type="file"
           name="image_url"
-          value={''}
-          onChange = {handleChange}
+          value={""}
+          onChange={handleChange}
         ></Input>
         <FormText color="muted">
           Upload an image of your receipt in .jpg format.
         </FormText>
       </FormGroup>
-      <Button type="submit" onSubmit={edit}>Submit</Button>
+      <Button type="submit" onSubmit={edit}>
+        Submit
+      </Button>
     </Form>
   );
 };
 
 const mapStateToProps = state => {
-        return{
-        selectedReceipt: state.selectedReceipt,
-        receipts:[
-         
-          {
-            receiptid:selectReceipt.id,...selectReceipt
-          }
-        ]
-        }
-}
+  return {
+    selectedReceipt: state.selectedReceipt,
+    receipts: [
+      {
+        receiptid: selectReceipt.id,
+        ...selectReceipt
+      }
+    ]
+  };
+};
 
-export default connect(mapStateToProps,{ editReceipt })(EditReceipt);
+export default connect(mapStateToProps, { editReceipt })(EditReceipt);
