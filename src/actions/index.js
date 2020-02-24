@@ -12,7 +12,7 @@ export const DELETE_RECEIPT = 'DELETE_RECEIPT';
 export const LOGIN = 'LOGIN';
 export const EDIT_RECEIPT = 'EDIT_RECEIPT';
 export const SELECT_RECEIPT = 'SELECT_RECEIPT';
-
+export const EDIT_RECEIPT_FAILURE='EDIT_RECEIPT_FAILURE'
 export const fetchReceipts = search => dispatch => {
     dispatch({ type: START_FETCHING });
     
@@ -35,27 +35,27 @@ export const addReceipt = newReceipt => dispatch => {
 
 export const deleteReceipt = props => dispatch => {
     
+    console.log("DELETE ACTION",props.id,props.history)
     axiosWithAuth()
     .delete(`/auth/receipts/${props.id}/del`)
-    .then(res => props.history.push('/receipts'))
+    .then(res => {dispatch({ type:DELETE_RECEIPT , payload:props}, props.history.push('/home'))})
     .catch(err => dispatch({ type: FETCH_FAILURE, payload: err}))
     
 }
 
-export const logUser = credentials => dispatch => {
-    console.log('credentials',credentials)
-    dispatch({ type: LOGIN, payload: credentials.username})
+export const logUser = props => dispatch => {
+    console.log('credentials',props)
+    dispatch({ type: LOGIN, payload:props})
 
 }
 
-export const editReceipt = (props, editedReceipt) => dispatch => {
-    dispatch({ type: START_FETCHING })
-    console.log('edit function props', editedReceipt)
+export const editReceipt = props => dispatch => {
+    console.log('EDIT REDUCER',props,dispatch)
+    dispatch({type: EDIT_RECEIPT ,payload:props})
+    props.history.push('/home')
+    
 
-    axiosWithAuth()
-    .put(`/auth/receipts/${editedReceipt.id}`, editedReceipt)
-    .then(res => props.history.push('/receipts'))
-    .catch(err => dispatch({ type: FETCH_FAILURE, payload: err}))
+    
 }
 
 export const selectReceipt = props => dispatch => {
